@@ -1,0 +1,21 @@
+<header class="navbar-header d-flex align-items-center justify-content-between px-4">
+  <div class="d-flex align-items-center gap-3">
+    <button class="btn d-lg-none p-0 border-0" (click)="uiService.toggleSidebar()">
+      <ng-icon name="bootstrapList" size="24"></ng-icon>
+    </button>
+  </div>
+
+  <div class="d-flex align-items-center gap-3">
+    <button
+      class="btn bg-transparent text-body-tertiary"
+      (click)="uiService.toggleTheme()"
+      [title]="'Cambiar a modo ' + (uiService.theme() === 'light' ? 'oscuro' : 'claro')"
+    >
+      @if (uiService.theme() === 'light') {
+        <ng-icon name="bootstrapMoonFill" size="15"></ng-icon>
+      } @else {
+        <ng-icon name="bootstrapSunFill" size="15"></ng-icon>
+      }
+    </button>
+  </div>
+</header>
