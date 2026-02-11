@@ -1,0 +1,109 @@
+<div class="card shadow-sm border-0">
+  <div class="card-body p-4">
+    <h5 class="card-title mb-4 d-flex align-items-center">
+      <div class="text-body-tertiary rounded p-2 me-2 d-flex">
+        <ng-icon name="bootstrapPersonFillAdd"></ng-icon>
+      </div>
+      {{ 'customer_form.title' | translate }}
+    </h5>
+
+    <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label fw-medium" for="">{{
+          'customer_form.doc_type.label' | translate
+        }}</label>
+        <select
+          id="select-document-type"
+          class="form-select"
+          formControlName="document_type"
+          [class.is-invalid]="
+            customerForm.get('document_type')?.touched && customerForm.get('document_type')?.invalid
+          "
+        >
+          <option value="">{{ 'customer_form.doc_type.placeholder' | translate }}</option>
+          <option value="CC">{{ 'customer_form.doc_type.cc' | translate }}</option>
+          <option value="CE">{{ 'customer_form.doc_type.ce' | translate }}</option>
+          <option value="PAS">{{ 'customer_form.doc_type.pas' | translate }}</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-medium" for="txt-document-number">
+          {{ 'customer_form.doc_number.label' | translate }}
+          <span class="text-body-tertiary" style="font-size: .8rem;">
+            {{ 'customer_form.doc_number.min_value' | translate:{MIN_CHAR_DOC_NUM} }}
+          </span>
+        </label>
+        <input
+          id="txt-document-number"
+          type="text"
+          class="form-control"
+          formControlName="document_number"
+          placeholder="1928837432"
+          [class.is-invalid]="
+            customerForm.get('document_number')?.touched &&
+            customerForm.get('document_number')?.invalid
+          "
+        />
+        @if (
+          customerForm.get('document_number')?.errors?.['required'] &&
+          customerForm.get('document_number')?.touched
+        ) {
+          <div class="invalid-feedback">{{ 'customer_form.required' | translate }}</div>
+        }
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-medium" for="txt-full-name">
+          {{ 'customer_form.full_name.label' | translate }}
+          <span class="text-body-tertiary" style="font-size: .8rem;">
+            {{ 'customer_form.full_name.min_value' | translate:{MIN_CHAR_NAME} }}
+          </span>
+        </label>
+        <input
+          id="txt-full-name"
+          type="text"
+          class="form-control"
+          formControlName="full_name"
+          placeholder="John Doe"
+          [class.is-invalid]="
+            customerForm.get('full_name')?.touched && customerForm.get('full_name')?.invalid
+          "
+        />
+      </div>
+
+      <div class="mb-4">
+        <label class="form-label fw-medium" for="txt-email">
+          {{ 'customer_form.email.label' | translate}}
+        </label>
+        <input
+          id="txt-email"
+          type="email"
+          class="form-control"
+          formControlName="email"
+          placeholder="john.doe@example.com"
+          [class.is-invalid]="
+            customerForm.get('email')?.touched && customerForm.get('email')?.invalid
+          "
+        />
+        @if (
+          customerForm.get('email')?.errors?.['required'] && customerForm.get('email')?.touched
+        ) {
+          <div class="invalid-feedback">{{ 'customer_form.required' | translate}}</div>
+        }
+        @if (customerForm.get('email')?.errors?.['email'] && customerForm.get('email')?.touched) {
+          <div class="invalid-feedback">{{ 'customer_form.email.invalid_format' | translate}}</div>
+        }
+      </div>
+
+      <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+        <button type="button" class="btn btn-outline-secondary btn-sm px-4" (click)="customerForm.reset()">
+          {{ 'btn.clear' | translate}}
+        </button>
+        <button type="submit" class="btn btn-primary btn-sm px-4" [disabled]="customerForm.invalid">
+          {{ 'btn.add' | translate}}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
