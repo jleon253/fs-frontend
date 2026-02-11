@@ -1,0 +1,117 @@
+<div class="row g-4 m-2 mt-0">
+  <div class="col-12 col-lg-4 mt-0 pt-3 border-end">
+    <div class="input-group mb-3">
+      <span class="input-group-text">
+        @if (isSearching()) {
+          <div class="spinner-border spinner-border-sm text-primary"></div>
+        } @else {
+          <ng-icon name="bootstrapSearch"></ng-icon>
+        }
+      </span>
+      <input
+        type="text"
+        class="form-control border-start-0 ps-0"
+        placeholder="Buscar cliente por nombre o número"
+        (input)="onCustomerSearch($event)"
+      />
+    </div>
+
+    <div class="customer-list-scroll" style="max-height: 80vh; overflow-y: auto">
+      @for (c of customers(); track c.id) {
+        <div #customerCard [attr.data-doc]="c.document_number">
+          <app-customer-mini-card
+            [customer]="c"
+            [isSelected]="selectedDocumentNumber() === c.document_number"
+            (selectCustomer)="selectCustomer(c.document_number)"
+          >
+          </app-customer-mini-card>
+        </div>
+      } @empty {
+        <div class="text-center p-4 text-muted small">
+          <i class="bi bi-person-exclamation fs-4 d-block mb-2"></i>
+          No se encontraron clientes
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-8">
+    <div class="card">
+      <div class="card-header d-flex flex-column justify-content-between align-items-center gap-3">
+        <div class="d-flex justify-content-between align-items-center w-100">
+          <h5 class="mb-0">Cuentas registradas</h5>
+          <button
+            class="btn btn-primary"
+            [disabled]="!selectedDocumentNumber() || isCreatingAccount()"
+            (click)="createAccount()"
+          >
+            @if (isCreatingAccount()) {
+              <span class="spinner-border spinner-border-sm"></span>
+              <span>Procesando...</span>
+            } @else {
+              <i class="bi bi-plus-lg"></i>
+              <span>Registrar Nueva Cuenta</span>
+            }
+          </button>
+        </div>
+
+        <div class="input-group">
+          <span class="input-group-text border-end-0 text-muted">
+            <ng-icon name="bootstrapSearch"></ng-icon>
+          </span>
+          <input
+            type="text"
+            class="form-control border-start-0 ps-0"
+            placeholder="Buscar por número de cuenta"
+            (input)="onAccountSearch($event)"
+          />
+        </div>
+      </div>
+      <div class="card-body p-2">
+        <div class="table-responsive">
+          <table class="table table-borderless align-middle">
+            <thead>
+              <tr>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (acc of accounts(); track acc.id) {
+                <tr class="mb-3 d-block">
+                  <td class="p-0 w-100 d-block">
+                    <app-account-row-card [account]="acc"></app-account-row-card>
+                  </td>
+                </tr>
+              } @empty {
+                <tr>
+                  <td class="text-center py-5">No se encontraron cuentas</td>
+                </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div
+        class="card-footer d-flex flex-column flex-md-row gap-2 justify-content-between align-items-center"
+      >
+        <div class="d-flex justify-content-between align-items-center gap-2 w-100">
+          <div class="text-muted small">
+            {{ 'table.total_record' | translate }} {{ totalItems() }}
+          </div>
+          <app-page-size-selector
+            [pageSize]="pageSize()"
+            (sizeChange)="pageSize.set($event); loadAccounts()"
+          >
+          </app-page-size-selector>
+        </div>
+        <ngb-pagination
+          [collectionSize]="totalItems()"
+          [page]="page()"
+          [pageSize]="pageSize()"
+          (pageChange)="page.set($event); loadAccounts()"
+        >
+        </ngb-pagination>
+      </div>
+    </div>
+  </div>
+</div>
