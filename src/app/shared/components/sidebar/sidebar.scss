@@ -1,0 +1,36 @@
+.sidebar {
+  &-container {
+    background-color: var(--bg-sidebar);
+    color: var(--sidebar-text);
+  }
+
+  &-header {
+    .logo {
+      background-color: var(--bg-btn-main);
+    }
+  }
+
+  &-links {
+    .nav-link {
+      color: var(--text-sidebar);
+      border-radius: 8px;
+      margin-bottom: 4px;
+
+      &:hover,
+      &.active {
+        color: var(--text-link-active);
+      }
+
+      &.active {
+        background-color: var(--bg-link-active);
+        color: var(--text-link-active);
+      }
+    }
+  }
+
+  &-footer {
+    p {
+      font-size: .8rem;
+    }
+  }
+}

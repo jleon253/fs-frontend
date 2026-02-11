@@ -1,0 +1,32 @@
+<div class="d-flex flex-column h-100 p-3 sidebar-container">
+  <div class="d-flex align-items-center mb-4 ps-2 sidebar-header">
+    <div class="rounded p-2 me-2 logo">
+      <ng-icon name="bootstrapBank2" color="white"></ng-icon>
+    </div>
+    <span class="fs-5 fw-bold text-light">{{ 'sidebar.company_name' |translate}}</span>
+  </div>
+
+  <ul class="nav nav-pills flex-column mb-auto sidebar-links">
+    <li class="nav-item">
+      <a routerLink="/customers" routerLinkActive="active" class="nav-link d-flex align-items-center py-2 px-3">
+        <ng-icon name="bootstrapPeople" class="me-3"></ng-icon>
+        {{ 'sidebar.links.customers' |translate |titlecase}}
+      </a>
+    </li>
+    <li class="nav-item">
+      <a routerLink="/accounts" routerLinkActive="active" class="nav-link d-flex align-items-center py-2 px-3">
+        <ng-icon name="bootstrapWallet2" class="me-3"></ng-icon>
+        {{ 'sidebar.links.accounts' |translate |titlecase}}
+      </a>
+    </li>
+  </ul>
+
+  <hr>
+
+  <div class="d-flex align-items-center p-2 sidebar-footer">
+    <div class="p-2 me-2 w-32 h-32">
+      <ng-icon name="bootstrapPerson" color="white"></ng-icon>
+    </div>
+    <p class="text-light">Administrador</p>
+  </div>
+</div>
