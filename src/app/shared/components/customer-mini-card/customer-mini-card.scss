@@ -6,7 +6,8 @@
   transition: all 0.2s ease;
 
   &:hover{
-    background-color: #f8f9fa;
+    background-color: var(--bg-mini-card);
+    border-color: #0d6efd !important;
   }
   
   &.selected {
