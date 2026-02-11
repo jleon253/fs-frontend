@@ -13,7 +13,7 @@ import { NgbPagination } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, distinctUntilChanged, Subject, Subscription } from 'rxjs';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { bootstrapSearch } from '@ng-icons/bootstrap-icons';
+import { bootstrapPlusCircle, bootstrapSearch } from '@ng-icons/bootstrap-icons';
 
 import { CustomerService } from '../../../core/services/customer.service';
 import { AccountService } from '../../../core/services/account.service';
@@ -23,12 +23,20 @@ import { CustomerMiniCard } from '../../../shared/components/customer-mini-card/
 import { TranslatePipe } from '@ngx-translate/core';
 
 const ACCOUNT_MANAGEMENT_ICONS = {
-  bootstrapSearch
+  bootstrapSearch,
+  bootstrapPlusCircle
 };
 
 @Component({
   selector: 'app-account-management',
-  imports: [NgbPagination, PageSizeSelector, AccountRowCard, CustomerMiniCard, NgIconComponent, TranslatePipe],
+  imports: [
+    NgbPagination,
+    PageSizeSelector,
+    AccountRowCard,
+    CustomerMiniCard,
+    NgIconComponent,
+    TranslatePipe,
+  ],
   templateUrl: './account-management.html',
   styleUrl: './account-management.scss',
   providers: [provideIcons(ACCOUNT_MANAGEMENT_ICONS)],
@@ -71,8 +79,12 @@ export class AccountManagement implements OnInit, OnDestroy {
 
   selectCustomer(documentNumber: string) {
     const newSelection = this.selectedDocumentNumber() === documentNumber ? null : documentNumber;
-
     this.selectedDocumentNumber.set(newSelection);
+
+    if (!newSelection) {
+      this.accountSearchTerm.set('');
+    }
+
     this.page.set(1);
     this.loadAccounts();
   }
@@ -94,6 +106,15 @@ export class AccountManagement implements OnInit, OnDestroy {
   }
 
   loadAccounts() {
+    const docNumber = this.selectedDocumentNumber();
+    const search = this.accountSearchTerm();
+
+    if (!docNumber && !search) {
+      this.accountService.clearLocalAccounts();
+      this.totalItems.set(0);
+      return;
+    }
+
     this.isLoading.set(true);
 
     const getAccountSub = this.accountService

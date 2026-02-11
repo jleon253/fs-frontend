@@ -45,8 +45,12 @@ export class AccountService {
   }
 
   updateStatus(accountId: string, newStatus: TAccountStatus): Observable<any> {
-    return this.http.patch<any>(`${this.apiUrl}/${accountId}/status`, { status: newStatus }).pipe(
-      tap(() => this.accountChangedSource.next()),
-    );
+    return this.http
+      .patch<any>(`${this.apiUrl}/${accountId}/status`, { status: newStatus })
+      .pipe(tap(() => this.accountChangedSource.next()));
+  }
+
+  clearLocalAccounts(): void {
+    this.#accounts.set([]);
   }
 }
