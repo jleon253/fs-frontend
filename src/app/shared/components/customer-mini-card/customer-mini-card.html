@@ -1,0 +1,17 @@
+<div class="card mini-card mb-2" [class.selected]="isSelected()" (click)="onCardClick($event)" (keydown)="onCardClick($event)">
+  <div class="card-body d-flex align-items-center p-2">
+    <div class="avatar-circle me-3" [style.background-color]="isSelected() ? '#0d6efd' : '#6c757d'">
+      {{ initials() }}
+    </div>
+
+    <div class="flex-grow-1 overflow-hidden">
+      <p class="mb-0 fw-bold text-truncate" [class.text-primary]="isSelected()">{{ customer().full_name }}</p>
+      <small class="text-muted d-block"
+        >{{ customer().document_type }}: {{ customer().document_number }}</small
+      >
+    </div>
+    <div class="selection-indicator ms-2">
+      <div class="custom-radio" [class.checked]="isSelected()"></div>
+    </div>
+  </div>
+</div>
