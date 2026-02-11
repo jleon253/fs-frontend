@@ -1,0 +1,103 @@
+<div class="card shadow-sm">
+  <div class="card-header d-flex flex-column justify-content-between align-items-center gap-3">
+    <div class="d-flex justify-content-between align-items-center w-100">
+      <h5 class="card-title m-0">
+        {{ 'customer_list.title' | translate}}
+      </h5>
+
+      <button class="btn bg-transparent" (click)="loadCustomers()" [disabled]="isLoading()">
+        <ng-icon name="bootstrapArrowClockwise" [class.spin]="isLoading()"></ng-icon>
+      </button>
+    </div>
+
+    <div class="input-group">
+      <span class="input-group-text border-end-0">
+        <ng-icon name="bootstrapSearch"></ng-icon>
+      </span>
+      <input
+        type="text"
+        class="form-control border-start-0 ps-0"
+        [placeholder]="'customer_list.search.placeholder' | translate"
+        (input)="onSearch($event)"
+      />
+    </div>
+  </div>
+
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover mb-0">
+        <thead>
+          <tr>
+            <th>{{ 'customer_list.table.document' | translate}}</th>
+            <th>{{ 'customer_list.table.name' | translate}}</th>
+            <th>{{ 'customer_list.table.email' | translate}}</th>
+            <th>{{ 'customer_list.table.createdAt' | translate}}</th>
+            <th>{{ 'table.actions' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (customer of customers(); track customer.id) {
+            <tr>
+              <td>
+                <div class="d-flex align-items-center" style="flex-wrap: nowrap">
+                  <div class="badge text-bg-secondary me-1" style="width: 40px">
+                    {{ customer.document_type }}
+                  </div>
+                  <div>{{ customer.document_number }}</div>
+                </div>
+              </td>
+              <td>
+                <p class="d-inline-block text-truncate" style="max-width: 90%;" [title]="customer.full_name">
+                  {{ customer.full_name }}
+                </p>
+              </td>
+              <td>{{ customer.email }}</td>
+              <td>{{ customer.created_at | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <button
+                  class="btn btn-sm btn-outline-info"
+                  (click)="navigateToCustomerAccounts(customer.document_number)"
+                >
+                  <ng-icon name="bootstrapBoxArrowUpRight"></ng-icon>
+                  {{ 'customer_list.table.accounts' | translate}}
+                </button>
+              </td>
+            </tr>
+          } @empty {
+            <tr>
+              <td>
+                @if (isLoading()) {
+                  <div class="spinner-border spinner-border-sm text-primary"></div>
+                  {{ 'table.loading' | translate}}
+                } @else {
+                  {{ 'customer_list.table.customers_not_found' | translate}}
+                }
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div
+    class="card-footer d-flex flex-column flex-md-row gap-2 justify-content-between align-items-center"
+  >
+    <div class="d-flex justify-content-between align-items-center gap-2 w-100">
+      <div class="text-muted small">{{ 'table.total_record' | translate}} {{ totalItems() }}</div>
+      <app-page-size-selector
+        [pageSize]="pageSize()"
+        (sizeChange)="changePageSize($event)"
+      ></app-page-size-selector>
+    </div>
+    <ngb-pagination
+      [collectionSize]="totalItems()"
+      [page]="page()"
+      [pageSize]="pageSize()"
+      (pageChange)="onPageChange($event)"
+      [maxSize]="5"
+      [boundaryLinks]="true"
+      size="sm"
+    >
+    </ngb-pagination>
+  </div>
+</div>
