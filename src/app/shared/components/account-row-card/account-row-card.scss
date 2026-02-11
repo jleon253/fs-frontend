@@ -1,0 +1,71 @@
+:host {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.account-card-container {
+  transition: all 0.3s ease;
+  border-left: 4px solid #dee2e6 !important; // Borde lateral neutro por defecto
+
+  &:hover {
+    cursor: pointer;
+    border-color: #0d6efd !important;
+    transform: translateX(4px);
+  }
+}
+
+// Estilo dinámico según el estado (puedes usar clases vinculadas al signal)
+.status-active { border-left-color: #198754 !important; }
+.status-inactive { border-left-color: #dc3545 !important; }
+
+.btn-actions {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.2s;
+  color: #6c757d;
+
+  &:hover:not(:disabled) {
+    background-color: rgba(0, 0, 0, 0.05) !important;
+    color: #000 !important;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.dropdown-menu {
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem;
+
+  .dropdown-item {
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+
+    i {
+      font-size: 1.1rem;
+    }
+
+    &:active {
+      background-color: #e9ecef !important;
+      color: inherit;
+    }
+  }
+}
+
+// Spinner ajustado para no deformar el botón
+.spinner-border-sm {
+  width: 1.2rem;
+  height: 1.2rem;
+  border-width: 0.15em;
+}
