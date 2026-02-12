@@ -1,0 +1,66 @@
+{
+  "btn": {
+    "clear": "Limpiar",
+    "add": "Agregar"
+  },
+  "table": {
+    "total_record": "Total de registros:",
+    "size_label": "Mostrar:",
+    "actions": "Acciones",
+    "loading": "Cargando..."
+  },
+  "toast_msg": {
+    "success": {
+      "title": "Éxito",
+      "customer_register": "Cliente {{name}} registrado con éxito"
+    },
+    "error": {
+      "title": "Error",
+      "customer_register": "Error registrando al clientes"
+    }
+  },
+  "sidebar": {
+    "company_name": "CorpBank",
+    "links": {
+      "customers": "clientes",
+      "accounts": "cuentas"
+    }
+  },
+  "customer_form": {
+    "title": "Nuevo Cliente",
+    "required": "Campo requerido",
+    "doc_type": {
+      "label": "Tipo de Documento",
+      "placeholder": "Seleccione tipo de documento",
+      "cc": "Cédula de Ciudadanía",
+      "ce": "Cédula de Extranjería",
+      "pas": "Pasaporte"
+    },
+    "doc_number": {
+      "label": "Número de Documento *",
+      "min_value": "(Mínimo {{MIN_CHAR_DOC_NUM}} caracteres)"
+    },
+    "full_name": {
+      "label": "Nombre Completo",
+      "min_value": "(Mínimo {{MIN_CHAR_NAME}} caracteres)"
+    },
+    "email": {
+      "label": "Email *",
+      "invalid_format": "Formato de correo inválido"
+    }
+  },
+  "customer_list": {
+    "title": "Clientes Registrados",
+    "search": {
+      "placeholder": "Buscar por nombre o documento"
+    },
+    "table": {
+      "document": "Documento",
+      "name": "Nombre",
+      "email": "Email",
+      "createdAt": "Fecha de Registro",
+      "accounts": "Cuentas",
+      "customers_not_found": "No se encontraron clientes registrados"
+    }
+  }
+}
