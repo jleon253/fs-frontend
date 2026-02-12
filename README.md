@@ -4,6 +4,11 @@ Este proyecto es una aplicación web moderna y responsive desarrollada con **Ang
 
 El backend se encuentra en el repositorio [fs-backend](https://github.com/jleon253/fs-backend).
 
+## KeyNotes
+* Explicación de proyecto en formato .pdf: [Click aqui para ver](/KeyNote/Kata-Keynote.pdf)
+* Respuestas a 4 preguntas sobre desplegar en AWS:
+![Respuestas AWS](/KeyNote/Respuestas_AWS.png)
+
 ## 🚀 Características Principales
 
 *   **Diseño Responsive**: Interfaz adaptable a diferentes tamaños de pantalla (móvil, tablet, escritorio) utilizando el sistema de grillas de Bootstrap.
